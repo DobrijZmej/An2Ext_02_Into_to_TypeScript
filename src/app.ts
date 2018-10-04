@@ -6,7 +6,7 @@ function showHello(divName: string, name: string) {
 }
 
 /**************** Задание 01 ************************/
-
+/*
 interface bookType {title: string, author: string, available?: boolean};
 function getAllBooks(){
     let books: bookType[] =
@@ -33,9 +33,9 @@ let books: bookType[] = getAllBooks();
 console.log(`First stage get array of books:`);
 console.log(books);
 logFirstAvailable(books);
-
+*/
 /**************** Задание 02 ************************/
-
+/*
 enum Category {'JavaScript', 'CSS', 'HTML', 'TypeScript', 'Angular'};
 interface bookType2 {title: string, author: string, available?: boolean, category?: Category};
 
@@ -71,3 +71,124 @@ function logBookTitles(books: bookType[]): void {
     }
 }
 logBookTitles(books);
+*/
+
+
+enum Category  {"JavaScript", "CSS", "HTML", "TypeScript", "Angular"};
+
+// Task #1.1
+function getAllBooks() {
+    let books = [
+        { title: 'Refactoring JavaScript', author: 'Evan Burchard', available: true, Category: Category.JavaScript},
+        { title: 'JavaScript Testing', author: 'Liang Yuxian Eugene', available: false, Category: Category.JavaScript },
+        { title: 'CSS Secrets', author: 'Lea Verou', available: true, Category: Category.CSS },
+        { title: 'Mastering JavaScript Object-Oriented Programming', author: 'Andrea Chiarelli', available: true, Category: Category.JavaScript }
+    ]
+
+    return books;
+}
+
+// Task #1.2
+function logFirstAvailable(books: { title: string, author: string, available: boolean }[]) : void {
+    
+    console.log('Length of books : '+books.length);
+    
+    for (const book of books) {
+        if (book!=null){
+            console.log('Title of first book : '+book.title);
+            break;
+        }
+    }
+}
+// Task #1.3
+logFirstAvailable(getAllBooks());
+
+// Task #2.3
+function getBookTitlesByCategory(category : Category){
+
+    let jsBooks: Array<String> = new Array;
+
+    for (const book of getAllBooks()) {
+        
+        if (book.Category == category){
+            jsBooks.push(book.title);
+        }
+    }
+
+    return jsBooks;
+}
+
+// Task #2.4
+function logBookTitles(books: Array<String>): void{
+
+    books.forEach(element => console.log(element));
+}
+
+logBookTitles(getBookTitlesByCategory(Category.JavaScript));
+
+
+// task 04
+interface Librarian {
+    name: string;
+    email: string;
+    department: string;
+    assistCustomer: (custName: string) => void;
+};
+
+class UniversityLibrarian implements Librarian {
+    name: string;
+    email: string;
+    department: string;
+    assistCustomer(custName: string){
+        console.log(`${this.name} is assisting ${custName}`);
+    }
+}
+
+const favoriteLabrarian: Librarian = new UniversityLibrarian();
+favoriteLabrarian.name='Some name';
+favoriteLabrarian.assistCustomer('Zmej');
+
+
+
+// task 05
+class ReferenceItem {
+    //title: string;
+    //year: number;
+    private _publisher: string;
+    constructor(public title: string, protected year: number){
+        //this.title = newTitle;
+        //this.year = newYear;
+        console.log(`Create new ReferenceItem...`);
+    }
+    printItem(): void {
+        console.log(`${this.title} was published in ${this.year}`);
+        console.log(ReferenceItem.department);
+    }
+    get publisher(): string {
+        return this._publisher.toUpperCase();
+    }
+    set publisher(newPublisher: string){
+        this._publisher = newPublisher;
+    }
+    static department: string = 'IT';
+}
+
+const ref = new ReferenceItem(`Sme title`, 1234);
+ref.printItem();
+ref.publisher = 'Zmej';
+console.log(ref.publisher);
+
+// task 06
+class Encyclopedia extends ReferenceItem {
+    //edition: number;
+    constructor(title: string, year: number, public edition: number){
+        super(title, year);
+    }
+    printItem(){
+        super.printItem();
+        console.log(`Edition: edition (${this.year})`);
+    }
+}
+
+const refBook = new Encyclopedia('second book', 1998, 5);
+refBook.printItem();
