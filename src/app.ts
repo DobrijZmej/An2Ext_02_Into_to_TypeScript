@@ -1,3 +1,7 @@
+import { Category } from "./enums";
+import { UniversityLibrarian, ReferenceItem } from "./classes";
+import { Librarian } from "./intefaces";
+
 showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
@@ -74,7 +78,6 @@ logBookTitles(books);
 */
 
 
-enum Category  {"JavaScript", "CSS", "HTML", "TypeScript", "Angular"};
 
 // Task #1.1
 function getAllBooks() {
@@ -128,21 +131,7 @@ logBookTitles(getBookTitlesByCategory(Category.JavaScript));
 
 
 // task 04
-interface Librarian {
-    name: string;
-    email: string;
-    department: string;
-    assistCustomer: (custName: string) => void;
-};
 
-class UniversityLibrarian implements Librarian {
-    name: string;
-    email: string;
-    department: string;
-    assistCustomer(custName: string){
-        console.log(`${this.name} is assisting ${custName}`);
-    }
-}
 
 const favoriteLabrarian: Librarian = new UniversityLibrarian();
 favoriteLabrarian.name='Some name';
@@ -151,27 +140,6 @@ favoriteLabrarian.assistCustomer('Zmej');
 
 
 // task 05
-class ReferenceItem {
-    //title: string;
-    //year: number;
-    private _publisher: string;
-    constructor(public title: string, protected year: number){
-        //this.title = newTitle;
-        //this.year = newYear;
-        console.log(`Create new ReferenceItem...`);
-    }
-    printItem(): void {
-        console.log(`${this.title} was published in ${this.year}`);
-        console.log(ReferenceItem.department);
-    }
-    get publisher(): string {
-        return this._publisher.toUpperCase();
-    }
-    set publisher(newPublisher: string){
-        this._publisher = newPublisher;
-    }
-    static department: string = 'IT';
-}
 
 const ref = new ReferenceItem(`Sme title`, 1234);
 ref.printItem();
